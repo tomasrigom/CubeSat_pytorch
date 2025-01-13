@@ -17,7 +17,11 @@ The num_labels is to be chosen by the user. The loss function used is **Huber lo
 - Usage of an **Adam optimizer**, with initial **learning rate of 0.001**
 - **Learning rate scheduler**, which reduces the learning rate by a factor of 0.1 when the validation loss plateaus (does not decrease) for 4 epochs
 - **Weight decay** regularization, with lambda parameter of 1e-4
-- Early stop with a patience of 6 epochs
+- Early stop with a patience of 6 epochs (which for the current version did not stop before the epoch limit).
 - Use of **automatic mixed precision (amp)** for improved computational efficiency
 
 Furthermore, the training function allows for a few more functionalities if desired by the user, like the use of SGD and momentum-based SGD. The code uses a GPU if available. The low patience (or im-patience) of the model is due to the high use of computational resources, which slows down training. While this project is STILL UNDER DEVELOPMENT, in the near future tests will be carried out to check whether or not a single network works well for regressing all 3 (x,y,z) labels.
+
+# Results
+
+At the end of the notebook results are displayed showing some random examples of running the model on the testing data with the error in the regression, as well as plots showing the evolution of the loss as a function of epoch and number of examples seen. After 50 epochs, the (x,y) pixel regression loss is 0.001 on both the training and validation data and the errors on the random examples are of order 1-2%. On the other hand, the z regression reaches after 50 epochs a loss of 0.006 on the training data and 0.014 on the validation data, while the error on the random examples is of ~ 10-12%. Future work will delve on improving on these results and creating a single network that predicts all three outputs, as well as providing a proper error estimate.
